@@ -1,0 +1,24 @@
+# Checkpoints and models - 50,000-iteration .pt neural network brain, FAISS indices, and GTO .db files
+checkpoints/
+
+# Precalculated matrix
+preflop_correlation_dict.py
+
+# Logs & Memory
+*.txt
+*.json
+*.log
+
+# Jupyter & Caches
+.ipynb_checkpoints/
+temp.ipynb
+__pycache__/
+*.pyc
+test_thresholds.py
+
+# Legacy GUI
+poker_gui.py
+
+# Internal / Excluded Folders
+NEXUS/
+Temp/
