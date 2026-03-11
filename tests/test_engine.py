@@ -1,4 +1,3 @@
-
 import unittest
 import sys
 import os
@@ -20,7 +19,7 @@ class TestPokerEngine(unittest.TestCase):
         # SB is button + 1 = Player 1
         # BB is button + 2 = Player 0 (mod 2)
         # Current player should be SB (Head's up rules are tricky, but generally dealer is SB, non-dealer is BB. 
-        # But this engine uses standard ring game logic: Button=0, SB=1, BB=0 (mod 2? No).
+        # But this engine uses standard ring game logic: Button=0, SB=1, BB=0 for 2 players. So current player should be SB=1 acting first.)
         # Button=0. SB=(0+1)%2=1. BB=(0+2)%2=0.
         # Current = (BB+1)%2 = 1. So Player 1 acts first.
         

@@ -1,4 +1,3 @@
-
 import unittest
 import sys
 import os
@@ -17,7 +16,7 @@ class TestFastEvaluator(unittest.TestCase):
         # Spades (3): 39=2s ... 51=As.
         # Royal: 10s(47), Js(48), Qs(49), Ks(50), As(51).
         
-        # Let's verify mapping in code or define it here.
+        # verify mapping in code or define it here.
         # 0=2, 8=10, 9=J, 10=Q, 11=K, 12=A.
         # Suit offsets: 0, 13, 26, 39.
         

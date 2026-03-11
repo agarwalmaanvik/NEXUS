@@ -1,4 +1,3 @@
-
 import unittest
 import torch
 import sys
@@ -33,11 +32,6 @@ class TestPokerBotAPI(unittest.TestCase):
                 self.assertIn("bid", market_data)
                 self.assertIn("ask", market_data)
             else:
-                # Can be None if player is inactive or no hand? 
-                # In test, player is active.
-                # If network fails or something, it might be None?
-                # The code says if not active or no hand -> None.
-                # Game reset gives hands.
                 pass
                 
         except Exception as e:

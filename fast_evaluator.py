@@ -158,23 +158,12 @@ class FastEvaluator:
         current_rank = 1
         last_score = None
         
-        # De-duplicate scores logic?
         # (3, 2, 4, 5, 7) has same score as (2, 3, 5, 7, 4).
         # But our generation ensures uniqueness of prime product for unsuited.
         # For flushes, bitmask is unique.
         
         # Standard approach: Simple iteration.
-        # If score == last_score, use same rank?
-        # NO. In generated list, distinct hands might have specific different kickers?
-        # Actually (Ad Kd Qd Jd 9d) > (Ad Kd Qd Jd 8d).
-        # Our sort key handles this.
-        # So every unique score gets a unique rank if it's strictly better?
-        # Yes.
-        
-        # Issue: Multiple permutations of same hand?
-        # combinations() returns checks ONCE.
-        # But Quads: (A A A A K). No other permutation generated.
-        # So the list should be strictly unique equivalence classes.
+        # list should be strictly unique equivalence classes.
         
         for i, h in enumerate(all_hands):
             # Check for strict increase

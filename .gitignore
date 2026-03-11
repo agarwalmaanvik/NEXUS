@@ -22,3 +22,13 @@ poker_gui.py
 # Internal / Excluded Folders
 NEXUS/
 Temp/
+
+# Unrelated / Standalone Scripts
+datagen.py
+generate_experience.py
+market_maker.py
+play_nexus.py
+precalc_correlation.py
+precalc_correlation_fast.py
+trainer.py
+verify_nexus.py

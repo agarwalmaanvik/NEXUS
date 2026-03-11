@@ -1,4 +1,3 @@
-
 import unittest
 import sys
 import os
@@ -77,10 +76,6 @@ class TestPayouts(unittest.TestCase):
         # P0 Total = 30. P1 Total = 180.
         
         # Setup Hands implies ranks
-        # We can mock the evaluator or set cards.
-        # Let's mock evaluate for precise control.
-        # But we can't easily mock inner object.
-        # We'll set cards.
         
         # Board: 2c 3c 4c 5c 7d (No straight flush, keep it simple)
         self.game.board = [0, 1, 2, 3, 18]
