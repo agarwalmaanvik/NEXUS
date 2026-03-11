@@ -1,3 +1,5 @@
+**[Read the Full Technical Whitepaper Here](./NEXUS_Whitepaper.pdf)**
+
 # NEXUS Poker Bot
 
 **NEXUS** is a state-of-the-art, 6-pillar hybrid Texas Hold'em engine designed to achieve near-Game Theory Optimal (GTO) play while actively exploiting human opponents, all while running efficiently on consumer hardware.
