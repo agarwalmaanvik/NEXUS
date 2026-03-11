@@ -43,9 +43,9 @@ class OpponentProfiler:
                         self.passive_moves[1] = p1_data.get("pas", 0)
                         self.wtsd_count[1] = p1_data.get("wtsd", 0)
                         self.saw_flop_count[1] = p1_data.get("saw_flop", 0)
-                    print(f"🧠 Profiler Loaded: {int(self.hands_played[1])} hands on record.")
+                    print(f"Profiler Loaded: {int(self.hands_played[1])} hands on record.")
             except Exception as e:
-                print(f"⚠️ Memory Corrupt: {e}")
+                print(f"Memory Corrupt: {e}")
 
     def save_memory(self):
         if self.training_mode: return

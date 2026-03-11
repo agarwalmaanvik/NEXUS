@@ -57,18 +57,18 @@ class SOTAPokerBot:
         self.bluff_freq  = bluff_freq
 
         # Pillar 1: GTO Network (strategy_net for inference)
-        print(f"🧠 Loading NEXUS brain from {model_path}...")
+        print(f"Loading NEXUS brain from {model_path}...")
         self.net = NEXUS_GTO_Net(input_dim=INPUT_DIM).to(device)
         self.net.eval()
         try:
             data = torch.load(model_path, map_location=device)
             key  = 'strategy_net' if 'strategy_net' in data else 'model_state_dict'
             self.net.load_state_dict(data[key])
-            print(f"✅ Brain loaded. α={self.net.get_alpha():.3f}")
+            print(f"Brain loaded. α={self.net.get_alpha():.3f}")
         except FileNotFoundError:
             print("⚠️  No trained model found. Playing from untrained network.")
         except Exception as e:
-            print(f"⚠️  Load error: {e}. Playing from untrained network.")
+            print(f"Load error: {e}. Playing from untrained network.")
 
         # Pillar 2: Range Encoder + Tell Detector
         self._range_encoder = RangeEncoder(n_players=6)
@@ -90,7 +90,7 @@ class SOTAPokerBot:
             net=self.net, device=device,
             depth_limit=6, n_traversals=100, rag=None)
 
-        print(f"📚 RAG index: {len(self._rag)} situations")
+        print(f"RAG index: {len(self._rag)} situations")
 
     # ------------------------------------------------------------------
     # Hand lifecycle

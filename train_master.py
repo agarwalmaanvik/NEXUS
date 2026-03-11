@@ -59,7 +59,7 @@ def build_full_vec(state_vec: np.ndarray, range_enc: RangeEncoder,
 
 
 def train_master():
-    print(f"🚀 NEXUS training on {DEVICE}. INPUT_DIM={INPUT_DIM}")
+    print(f"NEXUS training on {DEVICE}. INPUT_DIM={INPUT_DIM}")
     os.makedirs(CHECKPOINT_DIR, exist_ok=True)
 
     # ── Initialise components ─────────────────────────────────────────────────
@@ -71,9 +71,9 @@ def train_master():
     # Load existing checkpoint
     ckpt_path = os.path.join(CHECKPOINT_DIR, f"{MODEL_NAME}_latest.pt")
     if agent.load(ckpt_path):
-        print(f"📂 Resumed from {ckpt_path}")
+        print(f"Resumed from {ckpt_path}")
     else:
-        print("🆕 Fresh start.")
+        print("Fresh start.")
 
     optimizer  = agent.optimizer
     # Cosine Annealing: LR cools from 1e-4 → 1e-5 over ITERATIONS steps.
@@ -83,10 +83,10 @@ def train_master():
     )
 
     rag.load()
-    print(f"📚 RAG: {len(rag)} situations")
+    print(f"RAG: {len(rag)} situations")
 
     history_files = sorted(glob.glob(os.path.join(CHECKPOINT_DIR, "ghost_*.pt")))
-    print(f"👻 FSP pool: {len(history_files)} snapshots")
+    print(f"FSP pool: {len(history_files)} snapshots")
 
     # Parallel envs for supplementary experience
     penv = ParallelPokerEnv(n_envs=NUM_ENVS, n_players=2)
@@ -99,7 +99,7 @@ def train_master():
         depth_limit=4, n_traversals=1,  # 1 traversal per call for speed
         rag=rag)
 
-    print(f"🔥 Training {ITERATIONS} iterations...")
+    print(f"Training {ITERATIONS} iterations...")
 
     for iteration in range(1, ITERATIONS + 1):
         t_start = time.time()
@@ -251,11 +251,11 @@ def train_master():
             agent.save(ckpt_path)
             rag.save()
             gc.collect()  # Reclaim fragmented memory after heavy save ops
-            print(f"💾 Saved at iteration {iteration}")
+            print(f"Saved at iteration {iteration}")
 
     agent.save(ckpt_path)
     rag.save()
-    print("✅ Training complete.")
+    print("Training complete.")
 
 
 if __name__ == "__main__":

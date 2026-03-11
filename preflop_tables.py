@@ -116,9 +116,9 @@ class PreflopOracle:
         conn.close()
 
         if count < 1000:  # Tables not populated yet
-            print("🃏 PreflopOracle: computing GTO tables (one-time setup)...")
+            print("PreflopOracle: computing GTO tables (one-time setup)...")
             self._compute_and_store()
-            print("✅ PreflopOracle: tables ready.")
+            print("PreflopOracle: tables ready.")
 
     def _compute_and_store(self) -> None:
         """
