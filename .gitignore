@@ -5,7 +5,8 @@ checkpoints/
 preflop_correlation_dict.py
 
 # Logs & Memory
-*.txt
+crash_log.txt
+game_log.txt
 *.json
 *.log
 

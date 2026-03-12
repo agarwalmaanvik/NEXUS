@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+websockets
+pydantic
+numpy
+torch  # Required by SOTAPokerBot
+sentence-transformers # Required if RAG is used
+pyyaml
