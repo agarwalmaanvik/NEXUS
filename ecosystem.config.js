@@ -9,6 +9,13 @@ module.exports = {
                 PORT: 8000,
                 NODE_ENV: "production"
             }
+        },
+        {
+            name: "nexus-frontend",
+            script: "npm",
+            args: "run dev -- --host",
+            cwd: "./web_gui",
+            watch: false
         }
     ]
 };
