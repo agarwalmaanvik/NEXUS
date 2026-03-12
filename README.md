@@ -9,10 +9,6 @@
 
 **[Play Against NEXUS Live](https://nexuspoker.live)** | **[Read the Full Technical Whitepaper Here](./NEXUS_Whitepaper.pdf)**
 
-> A state-of-the-art, consumer-hardware-deployable Texas Hold'em engine. NEXUS navigates non-zero-sum, imperfect-information environments by synthesizing Deep Counterfactual Regret Minimization (CFR), Bayesian inference, and variance-capped Reinforcement Learning.
-
-**[Read the Full Technical Whitepaper Here](./NEXUS_Whitepaper.pdf)**
-
 ---
 
 ## The Architecture Problem
