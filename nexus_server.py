@@ -46,6 +46,7 @@ class GameSession:
         self.market = {}
         self.hero_pre = 2000.0
         self.last_activity = asyncio.get_event_loop().time()
+        self.lock = asyncio.Lock()
 
     def update_activity(self):
         self.last_activity = asyncio.get_event_loop().time()
@@ -69,7 +70,7 @@ class GameSession:
         
         # Check if hand is actually over to reveal cards
         active_count = len([p for p in self.gs.players if p.active])
-        hand_over = active_count <= 1 or (self.gs.stage == 3 and self.gs.current_player == -1)
+        hand_over = not self.is_active or active_count <= 1 or (self.gs.stage == 3 and self.gs.current_player == -1)
         
         should_reveal = reveal_bot_cards or hand_over
 
@@ -172,6 +173,9 @@ class GameSession:
             await websocket.send_json({"type": "STATE_UPDATE", "state": self.get_client_state()})
 
     async def end_hand(self, websocket: WebSocket):
+        if not self.is_active:
+            return
+        self.is_active = False
         payouts = self.gs.resolve_hand()
         for i, p in enumerate(self.gs.players):
             p.stack += payouts[i]
@@ -212,20 +216,30 @@ class ConnectionManager:
         
         msg_type = data.get("type")
         
-        if msg_type == "START_HAND":
-            state = session.start_new_hand()
-            await session.advance_game(websocket)
-            
-        elif msg_type == "PLAYER_ACTION":
-            action_idx = data.get("action")
-            amount = data.get("amount", 0)
-            
-            if session.gs.current_player == HERO_SEAT:
-                done = session.gs.step(action_idx, amount)
-                if done:
-                    await session.end_hand(websocket)
-                else:
-                    await session.advance_game(websocket)
+        async with session.lock:
+            if msg_type == "START_HAND":
+                state = session.start_new_hand()
+                await session.advance_game(websocket)
+                
+            elif msg_type == "PLAYER_ACTION":
+                action_idx = data.get("action")
+                amount = data.get("amount", 0)
+                
+                if session.is_active and session.gs.current_player == HERO_SEAT:
+                    done = session.gs.step(action_idx, amount)
+                    if done:
+                        await session.end_hand(websocket)
+                    else:
+                        await session.advance_game(websocket)
+
+            elif msg_type == "RESET_GAME":
+                # Hard reset stacks to 2000
+                for p in session.gs.players:
+                    p.stack = 2000.0
+                    p.bet = 0
+                    p.total_bet = 0
+                session.start_new_hand()
+                await session.advance_game(websocket)
 
     async def prune_sessions(self, max_idle_time: int = 3600):
         """Remove sessions that haven't been active for over an hour."""

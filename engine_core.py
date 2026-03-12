@@ -244,11 +244,14 @@ class GameState:
 
     def _post_bet(self, p, amt):
         if amt > 0:
-            p.stack -= amt
-            p.bet += amt
-            p.total_bet += amt
-            self.pot += amt
-        if p.stack == 0: p.all_in = True
+            actual_amt = min(amt, p.stack)
+            p.stack -= actual_amt
+            p.bet += actual_amt
+            p.total_bet += actual_amt
+            self.pot += actual_amt
+        if p.stack <= 0:
+            p.stack = 0
+            p.all_in = True
 
     def _deal_community(self, count):
         for _ in range(count):

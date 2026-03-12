@@ -35,3 +35,7 @@ trainer.py
 verify_nexus.py
 
 deployment_guide.md
+web_gui/node_modules/
+dist/
+.env
+.DS_Store

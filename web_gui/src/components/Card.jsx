@@ -7,8 +7,8 @@ const _SUIT_SYMS = { 'c': '♣', 'd': '♦', 'h': '♥', 's': '♠' };
 const Card = ({ cardInt, hidden }) => {
     if (hidden) {
         return (
-            <div className="card hidden border-2 border-white/20">
-                <div className="w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+            <div className="card hidden">
+                <div className="card-back-pattern" />
             </div>
         );
     }
@@ -21,14 +21,14 @@ const Card = ({ cardInt, hidden }) => {
     const isRed = suitChar === 'd' || suitChar === 'h';
 
     return (
-        <div className="card animate-in fade-in zoom-in duration-300">
-            <div className={`text-xl font-bold ${isRed ? 'text-red-600' : 'text-black'}`}>
+        <div className="card">
+            <div className={`text-lg font-black ${isRed ? 'text-red' : 'text-black'}`} style={{ lineHeight: 1 }}>
                 {rank}
             </div>
-            <div className={`text-sm ${isRed ? 'text-red-500' : 'text-black'}`}>
+            <div className={`text-sm font-bold ${isRed ? 'text-red' : 'text-black'}`} style={{ lineHeight: 1 }}>
                 {suitSym}
             </div>
-            <div className={`card-suit-big ${isRed ? 'text-red-500' : 'text-black'}`}>
+            <div className={`card-suit-big ${isRed ? 'text-red' : 'text-black'}`} style={{ opacity: 0.4 }}>
                 {suitSym}
             </div>
         </div>
