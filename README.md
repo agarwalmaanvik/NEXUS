@@ -1,8 +1,13 @@
 # NEXUS: Deep CFR & Bounded Exploit Poker Engine
 
+[![Live Demo](https://img.shields.io/badge/Live%20Website-nexuspoker.live-success.svg)](https://nexuspoker.live)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-EE4C2C.svg)](https://pytorch.org/)
 [![FAISS](https://img.shields.io/badge/FAISS-Vector%20Search-1A82E2.svg)](https://github.com/facebookresearch/faiss)
+
+> A state-of-the-art, consumer-hardware-deployable Texas Hold'em engine. NEXUS navigates non-zero-sum, imperfect-information environments by synthesizing Deep Counterfactual Regret Minimization (CFR), Bayesian inference, and variance-capped Reinforcement Learning.
+
+**[Play Against NEXUS Live](https://nexuspoker.live)** | **[Read the Full Technical Whitepaper Here](./NEXUS_Whitepaper.pdf)**
 
 > A state-of-the-art, consumer-hardware-deployable Texas Hold'em engine. NEXUS navigates non-zero-sum, imperfect-information environments by synthesizing Deep Counterfactual Regret Minimization (CFR), Bayesian inference, and variance-capped Reinforcement Learning.
 
