@@ -45,8 +45,13 @@ class GameSession:
         self.bot_thinking = False
         self.market = {}
         self.hero_pre = 2000.0
+        self.last_activity = asyncio.get_event_loop().time()
+
+    def update_activity(self):
+        self.last_activity = asyncio.get_event_loop().time()
 
     def start_new_hand(self):
+        self.update_activity()
         self.market = {}
         self.hero_pre = self.gs.players[HERO_SEAT].stack
         self.gs.reset(reset_stacks=False)
@@ -202,6 +207,7 @@ class ConnectionManager:
             return
             
         session = self.sessions[session_id]
+        session.update_activity()
         websocket = self.active_connections[session_id]
         
         msg_type = data.get("type")
@@ -221,7 +227,27 @@ class ConnectionManager:
                 else:
                     await session.advance_game(websocket)
 
+    async def prune_sessions(self, max_idle_time: int = 3600):
+        """Remove sessions that haven't been active for over an hour."""
+        while True:
+            await asyncio.sleep(600) # Check every 10 minutes
+            current_time = asyncio.get_event_loop().time()
+            to_remove = []
+            for sid, session in self.sessions.items():
+                if current_time - session.last_activity > max_idle_time:
+                    to_remove.append(sid)
+            
+            for sid in to_remove:
+                logger.info(f"Pruning idle session {sid}")
+                del self.sessions[sid]
+                if sid in self.active_connections:
+                    del self.active_connections[sid]
+
 manager = ConnectionManager()
+
+@app.on_event("startup")
+async def startup_event():
+    asyncio.create_task(manager.prune_sessions())
 
 @app.websocket("/ws/{session_id}")
 async def websocket_endpoint(websocket: WebSocket, session_id: str):

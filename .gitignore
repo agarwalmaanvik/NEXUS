@@ -32,3 +32,5 @@ precalc_correlation.py
 precalc_correlation_fast.py
 trainer.py
 verify_nexus.py
+
+deployment_guide.md

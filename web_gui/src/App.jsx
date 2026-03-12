@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PokerTable from './components/PokerTable';
 
 const SESSION_ID = Math.random().toString(36).substring(7);
-const WS_URL = `ws://localhost:8000/ws/${SESSION_ID}`;
+const WS_BASE_URL = import.meta.env.VITE_WS_URL || `ws://${window.location.hostname}:8000`;
+const WS_URL = `${WS_BASE_URL}/ws/${SESSION_ID}`;
 
 function App() {
     const [gameState, setGameState] = useState(null);
