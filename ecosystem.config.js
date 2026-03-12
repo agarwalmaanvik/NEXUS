@@ -2,8 +2,7 @@ module.exports = {
     apps: [
         {
             name: "nexus-backend",
-            script: "python",
-            args: "nexus_server.py",
+            script: "nexus_server.py",
             interpreter: "python3",
             watch: false,
             env: {
