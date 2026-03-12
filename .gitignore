@@ -7,8 +7,13 @@ preflop_correlation_dict.py
 # Logs & Memory
 crash_log.txt
 game_log.txt
-*.json
 *.log
+
+# Allow necessary project files
+!package.json
+!package-lock.json
+!vite.config.js
+!index.html
 
 # Jupyter & Caches
 .ipynb_checkpoints/
