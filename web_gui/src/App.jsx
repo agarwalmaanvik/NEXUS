@@ -2,10 +2,12 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PokerTable from './components/PokerTable';
 
 const SESSION_ID = Math.random().toString(36).substring(7);
-// Use localhost if we are running locally, otherwise use the live DigitalOcean IP
-const WS_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+// Use localhost if we are running locally, otherwise use the live domain
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const WS_BASE_URL = isLocal
     ? "ws://localhost:8000"
-    : "ws://137.184.41.164:8000";
+    : "wss://api.nexuspoker.live";
+
 const WS_URL = `${WS_BASE_URL}/ws/${SESSION_ID}`;
 console.log("Connecting to NEXUS at:", WS_URL);
 
